@@ -1,0 +1,28 @@
+plugins {
+  id "com.github.rzabini.gradle-jython" version "1.0.9"
+}
+
+apply plugin: 'java-library'
+
+
+repositories {
+  jcenter()
+  maven { url "https://jitpack.io" }
+  mavenLocal()
+}
+
+dependencies {
+  jython(group:'com.github.dialogos-project', name:'dialogos', version:'2.0.2') {
+    exclude module: 'DialogOS_SphinxPlugin'
+    exclude module: 'DialogOS_MaryTTSPlugin'
+  }
+  
+  jython(group:'org.xerial',name:'sqlite-jdbc',version:'3.25.2')
+}
+
+
+
+task runClient(type:jython.JythonTask) {
+	script file('client_final.py')
+}
+
